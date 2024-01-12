@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!--  
+*****************************************************************************************
+*
+*  Filename:			    amr.gazebo
+*  Created:				    08/01/202$
+*  Last Modified:	    08/01/2024
+*  Author:				    Archit Jain
+*  
+*****************************************************************************************
+-->
+
+<robot>
+
+  <gazebo reference="amr_base">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="amr_LW">
+    <material>Gazebo/Black</material>
+    <kp>1e15</kp>
+    <kd>1e14</kd>
+    <fdir1>0 0 1</fdir1>
+  </gazebo>
+  <gazebo reference="amr_RW">
+    <material>Gazebo/Black</material>
+    <kp>1e15</kp>
+    <kd>1e14</kd>
+    <fdir1>0 0 1</fdir1>
+  </gazebo>
+
+  <gazebo reference="front_caster">
+    <mu1>0.05</mu1>
+    <mu2>0.05</mu2>
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <gazebo reference="rear_caster">
+    <mu1>0.05</mu1>
+    <mu2>0.05</mu2>
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+
+  <gazebo>
+    <plugin name="wheel_drive_controller" filename="libgazebo_ros_diff_drive.so">
+
+      <!-- wheels -->
+      <left_joint>amr_LW_joint</left_joint>
+      <right_joint>amr_RW_joint</right_joint>
+
+      <!-- kinematics -->
+      <wheel_separation>0.315</wheel_separation>
+      <wheel_diameter>0.1</wheel_diameter>
+
+      <!-- limits -->
+      <max_wheel_torque>100.0</max_wheel_torque>
+      <max_wheel_acceleration>10.0</max_wheel_acceleration>
+
+      <!-- odometry  --> 
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_footprint</robot_base_frame>
+
+      <!-- topic & re remappings -->
+      <ros>
+        <namespace>/</namespace>
+        <remapping>/cmd_vel:=cmd_vel</remapping>
+        <remapping>/odom:=odom</remapping>
+      </ros>
+
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+      <update_rate>100.0</update_rate>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="lidar">
+      <sensor name="lidar" type="ray">
+          <pose> 0 0 0 0 0 0 </pose>
+          <visualize>true</visualize>
+          <update_rate>30</update_rate>
+          <ray>
+              <scan>
+                  <horizontal>
+                      <samples>720</samples>
+                      <min_angle>-1.57</min_angle>
+                      <max_angle>1.57</max_angle>
+                  </horizontal>
+              </scan>
+              <range>
+                  <min>0.2</min>
+                  <max>8</max>
+              </range>
+          </ray>
+          <plugin name="lidar_controller" filename="libgazebo_ros_ray_sensor.so">
+              <ros>
+                  <remapping>~/out:=scan</remapping>
+              </ros>
+              <output_type>sensor_msgs/LaserScan</output_type>
+              <frame_name>lidar</frame_name>
+          </plugin>
+      </sensor>
+  </gazebo>
+
+</robot>
