@@ -3,8 +3,8 @@
 *****************************************************************************************
 *
 *  Filename:			    amr.gazebo
-*  Created:				    08/01/202$
-*  Last Modified:	    08/01/2024
+*  Created:				    08/01/2024
+*  Last Modified:	    15/03/2024
 *  Author:				    Archit Jain
 *  
 *****************************************************************************************
@@ -12,70 +12,96 @@
 
 <robot>
 
-  <gazebo reference="amr_base">
+  <gazebo reference="base_link">
     <material>Gazebo/Orange</material>
   </gazebo>
-
-  <gazebo reference="amr_LW">
+  <gazebo reference="drive_r_whl_r_link">
     <material>Gazebo/Black</material>
     <kp>1e15</kp>
     <kd>1e14</kd>
     <fdir1>0 0 1</fdir1>
   </gazebo>
-  <gazebo reference="amr_RW">
+  <gazebo reference="drive_r_whl_l_link">
     <material>Gazebo/Black</material>
     <kp>1e15</kp>
     <kd>1e14</kd>
     <fdir1>0 0 1</fdir1>
   </gazebo>
-
-  <gazebo reference="front_caster">
-    <mu1>0.05</mu1>
-    <mu2>0.05</mu2>
+  <gazebo reference="drive_f_whl_r_link">
+    <material>Gazebo/Black</material>
+    <kp>1e15</kp>
+    <kd>1e14</kd>
+    <fdir1>0 0 1</fdir1>
+  </gazebo>
+  <gazebo reference="drive_f_whl_l_link">
+    <material>Gazebo/Black</material>
+    <kp>1e15</kp>
+    <kd>1e14</kd>
+    <fdir1>0 0 1</fdir1>
+  </gazebo>
+  <gazebo reference="lidar_link">
     <material>Gazebo/Grey</material>
   </gazebo>
-
-  <gazebo reference="rear_caster">
-    <mu1>0.05</mu1>
-    <mu2>0.05</mu2>
-    <material>Gazebo/Grey</material>
-  </gazebo>
-
 
   <gazebo>
-    <plugin name="wheel_drive_controller" filename="libgazebo_ros_diff_drive.so">
+    <plugin name='amr_wheel_controller' filename='libgazebo_ros_diff_drive.so'>
+      <!-- <ros>
+        <namespace>/</namespace>
+        <argument>cmd_vel:=cmd_vel</argument>
+        <argument>odom:=odom</argument>
+      </ros> -->
 
-      <!-- wheels -->
-      <left_joint>amr_LW_joint</left_joint>
-      <right_joint>amr_RW_joint</right_joint>
+      <num_wheel_pairs>2</num_wheel_pairs>
+      <left_joint>drive_f_whl_l_joint</left_joint>
+      <right_joint>drive_f_whl_r_joint</right_joint>
+      <left_joint>drive_r_whl_l_joint</left_joint>
+      <right_joint>drive_r_whl_r_joint</right_joint>
 
       <!-- kinematics -->
-      <wheel_separation>0.315</wheel_separation>
-      <wheel_diameter>0.1</wheel_diameter>
+      <wheel_separation>0.46</wheel_separation>
+      <wheel_separation>0.46</wheel_separation>
+
+      <wheel_diameter>0.28</wheel_diameter>
+      <wheel_diameter>0.28</wheel_diameter>
 
       <!-- limits -->
-      <max_wheel_torque>100.0</max_wheel_torque>
-      <max_wheel_acceleration>10.0</max_wheel_acceleration>
+      <max_wheel_torque>20</max_wheel_torque>
+      <max_wheel_acceleration>1.0</max_wheel_acceleration>
 
-      <!-- odometry  --> 
-      <odometry_frame>odom</odometry_frame>
-      <robot_base_frame>base_footprint</robot_base_frame>
-
-      <!-- topic & re remappings -->
-      <ros>
-        <namespace>/</namespace>
-        <remapping>/cmd_vel:=cmd_vel</remapping>
-        <remapping>/odom:=odom</remapping>
-      </ros>
-
+      <!-- output -->
       <publish_odom>true</publish_odom>
       <publish_odom_tf>true</publish_odom_tf>
       <publish_wheel_tf>true</publish_wheel_tf>
-      <update_rate>100.0</update_rate>
+
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_footprint</robot_base_frame>
     </plugin>
   </gazebo>
 
-  <gazebo reference="lidar">
+  <gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor name="amr_imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <ros>
+          <remapping>~/out:=/imu/data</remapping>
+        </ros>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+        <initial_orientation_as_reference>false</initial_orientation_as_reference>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="lidar_link">
       <sensor name="lidar" type="ray">
           <pose> 0 0 0 0 0 0 </pose>
           <visualize>true</visualize>
@@ -93,14 +119,16 @@
                   <max>8</max>
               </range>
           </ray>
-          <plugin name="lidar_controller" filename="libgazebo_ros_ray_sensor.so">
+          <plugin name="amr_lidar_controller" filename="libgazebo_ros_ray_sensor.so">
               <ros>
                   <remapping>~/out:=scan</remapping>
               </ros>
               <output_type>sensor_msgs/LaserScan</output_type>
-              <frame_name>lidar</frame_name>
+              <frame_name>lidar_link</frame_name>
           </plugin>
       </sensor>
   </gazebo>
+
+
 
 </robot>
