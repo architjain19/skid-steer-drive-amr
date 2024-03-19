@@ -1,8 +1,16 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
+<!--  
+*****************************************************************************************
+*
+*  Filename:			    inertial_macros.xacro
+*  Created:				    19/03/2024
+*  Last Modified:	        19/03/2024
+*  Author:				    Archit Jain
+*  
+*****************************************************************************************
+-->
 
-    <!-- Specify some standard inertial calculations https://en.wikipedia.org/wiki/List_of_moments_of_inertia -->
-    <!-- These make use of xacro's mathematical functionality -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
     <xacro:macro name="inertial_sphere" params="mass radius *origin">
         <inertial>

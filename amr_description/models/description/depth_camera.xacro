@@ -1,4 +1,15 @@
 <?xml version="1.0"?>
+<!--  
+*****************************************************************************************
+*
+*  Filename:			    depth.xacro
+*  Created:				    19/03/2024
+*  Last Modified:	        19/03/2024
+*  Author:				    Archit Jain
+*  
+*****************************************************************************************
+-->
+
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
     <joint name="camera_joint" type="fixed">

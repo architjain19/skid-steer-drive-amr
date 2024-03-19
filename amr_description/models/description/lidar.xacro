@@ -1,10 +1,21 @@
 <?xml version="1.0"?>
+<!--  
+*****************************************************************************************
+*
+*  Filename:			    lidar.xacro
+*  Created:				    19/03/2024
+*  Last Modified:	        19/03/2024
+*  Author:				    Archit Jain
+*  
+*****************************************************************************************
+-->
+
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
     <joint name="laser_joint" type="fixed">
         <parent link="chassis"/>
         <child link="laser_frame"/>
-        <origin xyz="0.122 0 0.212" rpy="0 0 0"/>
+        <origin xyz="0.25 0 0.125" rpy="0 0 0"/>
     </joint>
 
     <link name="laser_frame">
@@ -38,7 +49,7 @@
 
         <sensor name="laser" type="ray">
             <pose> 0 0 0 0 0 0 </pose>
-            <visualize>false</visualize>
+            <visualize>true</visualize>
             <update_rate>10</update_rate>
             <ray>
                 <scan>
