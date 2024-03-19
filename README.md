@@ -9,9 +9,9 @@
 
 - Install Gazebo ROS Packages and Plugins for ros-foxy:
 > `sudo apt install ros-foxy-gazebo-ros-pkgs`
-> `sudo apt-get install ros-foxy-gazebo-plugins`
+> `sudo apt-get install ros-humble-gazebo-plugins`
 
 - Install other necessary packages:
-> `sudo apt-get install ros-foxy-xacro`
-> `sudo apt-get install ros-foxy-joint-state-publisher`
-> `sudo apt-get install ros-foxy-joint-state-publisher-gui`
+> `sudo apt-get install ros-humble-xacro`
+> `sudo apt-get install ros-humble-joint-state-publisher`
+> `sudo apt-get install ros-humble-joint-state-publisher-gui`
