@@ -17,27 +17,27 @@
   </gazebo>
   <gazebo reference="drive_r_whl_r_link">
     <material>Gazebo/Black</material>
-    <kp>1e15</kp>
+    <!-- <kp>1e15</kp>
     <kd>1e14</kd>
-    <fdir1>0 0 1</fdir1>
+    <fdir1>0 0 1</fdir1> -->
   </gazebo>
   <gazebo reference="drive_r_whl_l_link">
     <material>Gazebo/Black</material>
-    <kp>1e15</kp>
+    <!-- <kp>1e15</kp>
     <kd>1e14</kd>
-    <fdir1>0 0 1</fdir1>
+    <fdir1>0 0 1</fdir1> -->
   </gazebo>
   <gazebo reference="drive_f_whl_r_link">
     <material>Gazebo/Black</material>
-    <kp>1e15</kp>
+    <!-- <kp>1e15</kp>
     <kd>1e14</kd>
-    <fdir1>0 0 1</fdir1>
+    <fdir1>0 0 1</fdir1> -->
   </gazebo>
   <gazebo reference="drive_f_whl_l_link">
     <material>Gazebo/Black</material>
-    <kp>1e15</kp>
+    <!-- <kp>1e15</kp>
     <kd>1e14</kd>
-    <fdir1>0 0 1</fdir1>
+    <fdir1>0 0 1</fdir1> -->
   </gazebo>
   <gazebo reference="lidar_link">
     <material>Gazebo/Grey</material>
@@ -58,15 +58,15 @@
       <right_joint>drive_r_whl_r_joint</right_joint>
 
       <!-- kinematics -->
-      <wheel_separation>0.46</wheel_separation>
-      <wheel_separation>0.46</wheel_separation>
+      <wheel_separation>0.42</wheel_separation>
+      <wheel_separation>0.42</wheel_separation>
 
-      <wheel_diameter>0.28</wheel_diameter>
-      <wheel_diameter>0.28</wheel_diameter>
+      <wheel_diameter>0.08</wheel_diameter>
+      <wheel_diameter>0.08</wheel_diameter>
 
       <!-- limits -->
-      <max_wheel_torque>20</max_wheel_torque>
-      <max_wheel_acceleration>1.0</max_wheel_acceleration>
+      <max_wheel_torque>100</max_wheel_torque>
+      <max_wheel_acceleration>10.0</max_wheel_acceleration>
 
       <!-- output -->
       <publish_odom>true</publish_odom>

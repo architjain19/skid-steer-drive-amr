@@ -6,19 +6,19 @@
 *
 *  Filename:			amr_gazebo_launch.py
 *  Description:         Use this file to spawn AMR inside amr arena world in the gazebo simulator and publish robot states.
-*  Created:				08/01/202$
-*  Last Modified:	    08/01/2024
+*  Created:				08/01/2024
+*  Last Modified:	    15/03/2024
 *  Author:				Archit Jain
 *  
 *****************************************************************************************
 '''
 
-import launch
-import launch_ros
 import os
 import xacro
-from ament_index_python.packages import get_package_share_directory
+import launch
+import launch_ros
 from launch.actions import IncludeLaunchDescription
+from ament_index_python.packages import get_package_share_directory
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 pkg_name='amr_description'
@@ -32,7 +32,7 @@ def get_package_file(package, file_path):
 def generate_launch_description():
     pkg_share = launch_ros.substitutions.FindPackageShare(package=pkg_name).find(pkg_name)
 
-    xacro_file_amr = os.path.join(pkg_share, 'models/','amr/', 'amr.xacro')
+    xacro_file_amr = os.path.join(pkg_share, 'models/','description/', 'robot.urdf.xacro')
     assert os.path.exists(xacro_file_amr), "The amr.xacro doesnt exist in "+str(xacro_file_amr)
     robot_description_config_amr = xacro.process_file(xacro_file_amr)
     robot_description = robot_description_config_amr.toxml()
@@ -50,13 +50,6 @@ def generate_launch_description():
         executable='robot_state_publisher',
         parameters=[{"robot_description": robot_description}]
     )
-
-    static_transform = launch_ros.actions.Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='static_transform_publisher',
-        arguments = ["1.6", "-2.4", "-0.8", "3.14", "0", "0", "world", "odom"],
-        output='screen')
     
     spawn_amr = launch_ros.actions.Node(
     	package='gazebo_ros', 
@@ -66,18 +59,6 @@ def generate_launch_description():
         output='screen'
     )
 
-    joint_state_publisher_node_amr = launch_ros.actions.Node(
-        package="joint_state_publisher",
-        name="joint_state_publisher",
-        executable="joint_state_publisher"
-    )
-    
-    joint_state_publisher_gui_node_amr = launch_ros.actions.Node(
-        package="joint_state_publisher_gui",
-        name="joint_state_publisher_gui",
-        executable="joint_state_publisher_gui"
-    )
-
     return launch.LaunchDescription([
         launch.actions.DeclareLaunchArgument(name='gui', default_value='True',
                                             description='Flag to enable joint_state_publisher_gui'),
@@ -85,8 +66,5 @@ def generate_launch_description():
                                             description='Flag to enable use_sim_time'),
         start_world,
         robot_state_publisher_node_amr,
-        # static_transform,
-        spawn_amr,
-        joint_state_publisher_node_amr,
-        # joint_state_publisher_gui_node_amr
+        spawn_amr
     ])
