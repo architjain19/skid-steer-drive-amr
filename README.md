@@ -16,6 +16,12 @@
 > `sudo apt-get install ros-humble-joint-state-publisher`
 > `sudo apt-get install ros-humble-joint-state-publisher-gui`
 
+- Install Nav2 components:
+> `sudo apt install ros-humble-navigation2`
+> `sudo apt install ros-humble-nav2-bringup`
+> `sudo apt install ros-humble-slam-toolbox`
+> `sudo apt install ros-humble-robot-localization`
+
 # Execution Instructions:
 
 - Firstly, launch the gazebo world:
