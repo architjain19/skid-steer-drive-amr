@@ -22,7 +22,7 @@
 > `ros2 launch amr_description start_world_launch.py`
 
 - Then, launch this file for mapping:
-> `ros2 launch amr_navigation amr_navigation.launch.py`
+> `ros2 launch amr_navigation amr_mapping.launch.py`
 
-- Once map is saved, instead of navigation, you can launch this file for navigation:
-    > `ros2 launch amr_navigation amr_mapping.launch.py`
+- Once map is saved, now instead of mapping, you can launch this file for navigation:
+    > `ros2 launch amr_navigation amr_navigation.launch.py`
