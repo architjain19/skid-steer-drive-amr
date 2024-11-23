@@ -25,10 +25,12 @@
 # Execution Instructions:
 
 - Firstly, launch the gazebo world:
-> `ros2 launch amr_description start_world_launch.py`
+> `ros2 launch aws_robomaker_small_warehouse_world small_warehouse.launch.py`
+![alt text](_utils/gazebo.png)
 
-- Then, launch this file for mapping:
+- Then, launch this file for mapping and save the maps:
 > `ros2 launch amr_navigation amr_mapping.launch.py`
 
-- Once map is saved, now instead of mapping, you can launch this file for navigation:
-    > `ros2 launch amr_navigation amr_navigation.launch.py`
+- Once map is saved, launch this file for navigation:
+> `ros2 launch amr_navigation amr_navigation.launch.py`
+![alt text](_utils/navigation.png)

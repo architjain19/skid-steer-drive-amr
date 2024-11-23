@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!-- 
+*****************************************************************************************
+*
+*  Filename:			amr_arena.world
+*  Created:				08/01/2024
+*  Last Modified:	08/01/2024
+*  Author:				Archit Jain
+*  
+*****************************************************************************************
+-->
+
+<sdf version="1.6">
+  <world name="default">
+    
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+  </world>
+</sdf>
