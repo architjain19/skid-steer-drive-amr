@@ -8,19 +8,25 @@
 > Note: Source gazebo setup file if any plugin or files are not loading `source /usr/share/gazebo/setup.sh`
 
 - Install Gazebo ROS Packages and Plugins for ros-humble:
-> `sudo apt install ros-humble-gazebo-ros-pkgs`
-> `sudo apt-get install ros-humble-gazebo-plugins`
+```bash
+sudo apt install ros-humble-gazebo-ros-pkgs
+sudo apt-get install ros-humble-gazebo-plugins
+```
 
 - Install other necessary packages:
-> `sudo apt-get install ros-humble-xacro`
-> `sudo apt-get install ros-humble-joint-state-publisher`
-> `sudo apt-get install ros-humble-joint-state-publisher-gui`
+```bash
+sudo apt-get install ros-humble-xacro
+sudo apt-get install ros-humble-joint-state-publisher
+sudo apt-get install ros-humble-joint-state-publisher-gui
+```
 
 - Install Nav2 components:
-> `sudo apt install ros-humble-navigation2`
-> `sudo apt install ros-humble-nav2-bringup`
-> `sudo apt install ros-humble-slam-toolbox`
-> `sudo apt install ros-humble-robot-localization`
+```bash
+sudo apt install ros-humble-navigation2
+sudo apt install ros-humble-nav2-bringup
+sudo apt install ros-humble-slam-toolbox
+sudo apt install ros-humble-robot-localization
+```
 
 # Execution Instructions:
 
